@@ -1,0 +1,15 @@
+.search-bar-styles{
+    height: 25px;
+    width :40%;
+    padding: 10px;
+    border-radius: 5%;
+
+    border-bottom-color: grey;
+}
+
+.search-container-styles{
+margin: 20px auto;
+width: 300px;
+position: relative;
+
+}
