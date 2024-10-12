@@ -1,6 +1,8 @@
 import axios from "axios";
 import '../styles/recipie.css'
 import { useEffect, useState } from "react";
+
+import ItemList from "./ItemList";
 export default function FoodDetails({foodId}){
 
     const [food, setFood] = useState({})
@@ -13,6 +15,7 @@ export default function FoodDetails({foodId}){
     function priceAdjust(a){
         return a.toFixed(3);
     }
+
     
     useEffect(()=>{
         if(!foodId){return;}
@@ -47,6 +50,9 @@ export default function FoodDetails({foodId}){
             
             <h1>{food.title}</h1>
             <img src={food.image} alt="" />
+            <h1>Ingredients</h1>
+           <ItemList food={food} isloading={isloading}/>
+
             <div className="Recipie-stats">
                 <div>🕐 {food.preparationMinutes} minutes</div>
                 <div>{food.vegetarian ? "🥦 Vegitarian":"🥩 Non-vegetarian"}</div>
@@ -55,6 +61,7 @@ export default function FoodDetails({foodId}){
                 <div>💵 $ {parseFloat( priceAdjust(food.pricePerServing/100)) }</div>
             </div>
             <h1>Instructions</h1>
+            
             <div>
                 <ol>
                     {isloading ? "Loading instructions..." : food.analyzedInstructions[0].steps.map((st)=> <li key={st.number}>{st.step}</li>)}
